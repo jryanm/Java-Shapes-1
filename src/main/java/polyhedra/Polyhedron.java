@@ -5,7 +5,8 @@ import java.util.Scanner;
 /**
  * Abstract Polyhedron Base Class.
  */
-public abstract class Polyhedron implements Cloneable {
+public abstract class Polyhedron implements Cloneable
+{
     /**
      * A string representing the name of this polyhedron.
      */
@@ -17,9 +18,9 @@ public abstract class Polyhedron implements Cloneable {
     protected BoundingBox boundingBox;
 
     /**
-     * Default Constructor.
+     * Default Constructor. This constructor should never be called.
      */
-    public Polyhedron()
+    private Polyhedron()
     {
         this("Polyhedron");
     }
@@ -66,13 +67,6 @@ public abstract class Polyhedron implements Cloneable {
     }
 
     /**
-     * Retrieve and reconstruct the polyhedron from an input scanner.
-     *
-     * @param s scanner to use
-     */
-    public abstract void read(Scanner s);
-
-    /**
      * Apply a geometric scaling operation.
      *
      * @param scalingFactor scaling factor that is grather than or equal to 1
@@ -86,14 +80,8 @@ public abstract class Polyhedron implements Cloneable {
      */
     public abstract Polyhedron clone();
 
-    @Override
-    public String toString()
-    {
-        return "[" + type + "] " + boundingBox + "->";
-    }
-
     /**
-     * A helper function to clone and scale a Polyhedron
+     * A helper function to clone and scale a Polyhedron.
      *
      * @param original source Polyhedron
      * @param sFactor scaling factor
@@ -108,5 +96,18 @@ public abstract class Polyhedron implements Cloneable {
 
         return copy;
     }
+
+    @Override
+    public String toString()
+    {
+        return "[" + type + "] " + boundingBox + "->";
+    }
+
+    /**
+     * Retrieve and reconstruct the polyhedron from an input scanner.
+     *
+     * @param s scanner to use
+     */
+    public abstract void read(Scanner s);
 }
 

@@ -28,7 +28,7 @@ public class Cylinder extends Polyhedron {
      * Construct a cylinder with specified height and radius.
      *
      * @param r desired radius
-     * @param h deisred height
+     * @param h desired height
      */
     public Cylinder(double r, double h)
     {

@@ -22,7 +22,7 @@ public final class CreatePolyhedra {
      * Program Usage Message for display when the program is invoked without
      * command line arguments.
      */
-    private static final String USAGE_MSG =
+    public static final String USAGE_MSG =
         "Usage: java -jar CreatePolyhedra.jar inputFile scalingFactor";
 
     /**
@@ -42,13 +42,16 @@ public final class CreatePolyhedra {
 
         try {
             scalingFactor = Double.parseDouble(args[1]);
+
+            if (scalingFactor < 1) {
+                throw new IllegalArgumentException();
+            }
         }
         catch (NumberFormatException e) {
             System.err.println("Scaling Factor must be a positive number");
             System.exit(1);
         }
-
-        if (scalingFactor < 1) {
+        catch (IllegalArgumentException e) {
             System.err.println("Scaling Factor must be >= 1");
             System.exit(1);
         }
@@ -56,7 +59,8 @@ public final class CreatePolyhedra {
         BufferedReader polyIn = null;
 
         try {
-            polyIn = new BufferedReader(new FileReader(args[0]));
+            FileReader     polyFile   = new FileReader(args[0]);
+            polyIn = new BufferedReader(polyFile);
         }
         catch (FileNotFoundException e) {
             System.err.printf("Could not locate %s%n", args[0]);
@@ -66,6 +70,7 @@ public final class CreatePolyhedra {
         //----------------------------------------------------------------------
         List<Polyhedron> polyhedra = readPolyhedra(polyIn);
         List<Polyhedron> scaledCopies = duplicateAndScale(polyhedra, scalingFactor);
+
         //----------------------------------------------------------------------
         printPolyhedra(polyhedra, "Original Polyhedra");
         System.out.println();
@@ -145,7 +150,7 @@ public final class CreatePolyhedra {
      *
      * @return horizontal line as a string
      */
-    public static String createDivider(char lineChar, int width)
+    public static String createDivider(final char lineChar, final int width)
     {
         return String.format("%0" + width + "d", 0).replace("0", "" + lineChar);
     }
