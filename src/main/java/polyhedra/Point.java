@@ -14,7 +14,7 @@ public class Point implements Cloneable {
     public double z;
 
     /**
-     * Compare two points for equality within a specified threshold.
+     * Compare two doubles for equality within a specified threshold.
      *
      * @param lhs first floating point number
      * @param rhs second floating point number
@@ -29,6 +29,22 @@ public class Point implements Cloneable {
                                                final double threshold)
     {
         return Math.abs(rhs - lhs) <= threshold;
+    }
+
+    /**
+     * Compare two doubles for equality within a default threshold specified by
+     * {@code Point.EQ_THRESHOLD}.
+     *
+     * @param lhs first floating point number
+     * @param rhs second floating point number
+     *
+     * @return true if the x, y, and z components of both points are equal
+     *     within the specified threshold.
+     */
+    public static boolean equalWithinDftThreshold(final double lhs,
+                                               final double rhs)
+    {
+        return Math.abs(rhs - lhs) <= Point.EQ_THRESHOLD;
     }
 
     /**
